@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hidrotec - Cooperativa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    .loading-simples {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: #f0f0f0; display: flex; justify-content: center;
+        align-items: center; z-index: 9999; flex-direction: column;
+    }
+    .loading-simples .typing {
+        display: flex; background: #e0e0e0; padding: 12px 20px;
+        border-radius: 30px;
+    }
+    .loading-simples .circle {
+        width: 10px; height: 10px; border-radius: 50%;
+        background: #8d8d8d; margin: 0 6px;
+    }
+</style>
+<!-- Modal para adicionar evento -->
+<div id="modal-evento" class="modal">
+    <div class="modal-conteudo">
+        <h3>Adicionar Novo Evento</h3>
+        <p id="modal-data-exibida">Data: —</p>
+        <textarea id="descricao-evento" placeholder="Descreva o evento (ex: Mutirão de limpeza no Córrego Verde)"></textarea>
+        <div class="botoes-modal">
+            <button id="btn-cancelar-modal" class="btn-modal cancelar">Cancelar</button>
+            <button id="btn-salvar-modal" class="btn-modal salvar">Adicionar</button>
+        </div>
+    </div>
+</div><!-- Modal para adicionar evento -->
+<div id="modal-evento" class="modal">
+    <div class="modal-conteudo">
+        <h3>Adicionar Novo Evento</h3>
+        <p id="modal-data-exibida">Data: —</p>
+        <textarea id="descricao-evento" placeholder="Descreva o evento (ex: Mutirão de limpeza no Córrego Verde)"></textarea>
+        <div class="botoes-modal">
+            <button id="btn-cancelar-modal" class="btn-modal cancelar">Cancelar</button>
+            <button id="btn-salvar-modal" class="btn-modal salvar">Adicionar</button>
+        </div>
+    </div>
+    <!-- Modal de confirmação de exclusão -->
+<div id="modal-confirmacao" class="modal">
+    <div class="modal-conteudo confirmacao">
+        <h3>⚠️ Confirmar Exclusão</h3>
+        <p id="mensagem-confirmacao">Tem certeza que deseja excluir este evento?</p>
+        <div class="botoes-modal">
+            <button id="btn-cancelar-confirmacao" class="btn-modal cancelar">Cancelar</button>
+            <button id="btn-confirmar-exclusao" class="btn-modal excluir">Excluir</button>
+        </div>
+    </div>
+</div>
+</div>
+<body>
+   <!-- Tela de Carregamento -->
+   <div id="loading-screen" class="loading-simples">
+        <div class="typing">
+            <span class="circle scaling"></span>
+            <span class="circle bouncing"></span>
+            <span class="circle scaling"></span>
+        </div>
+        <p class="loading-text">Carregando Hidrotec...</p>
+    </div>
+
+    <!-- Cabeçalho com menu -->
+    <header>
+        <div class="logo">
+            <h1>Hidrotec</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#inicio" onclick="mostrarGuia('inicio'); return false;">Início</a></li>
+                <li><a href="#calendario" onclick="mostrarGuia('calendario'); return false;">Calendário</a></li>
+                <li><a href="#projeto" onclick="mostrarGuia('projeto'); return false;">Projeto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Conteúdo das guias -->
+    <main>
+        <!-- Guia INÍCIO -->
+        <section id="inicio" class="guia">
+            <div class="hero">
+                <div class="hero-conteudo">
+                    <h1 class="titulo-principal">Bem-vindo à Hidrotec</h1>
+                    <p class="subtitulo-principal">Conectando forças para preservar rios limpos e promover a sustentabilidade ambiental.</p>
+                    <a href="#conteudo-abaixo" class="seta-rolar">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div id="conteudo-abaixo" class="conteudo-abaixo">
+                <div class="container-duas-colunas">
+                    <div class="coluna esquerda">
+                        <h2>Sobre a Hidrotec</h2>
+                        <ul class="topicos-hidrotec">
+                            <li><strong>Missão:</strong> A Hidrotec atua na limpeza dos rios para preservar a sustentabilidade ambiental, combatendo a poluição e garantindo a saúde dos ecossistemas aquáticos; sua missão é proteger os recursos hídricos, promovendo um futuro mais limpo e equilibrado para as próximas gerações.</li>
+                            <li><strong>Visão:</strong> A visão do projeto Hidrotec é ser referência na preservação dos rios, promovendo a sustentabilidade e a redução da poluição para garantir ecossistemas saudáveis e um futuro sustentável.</li>
+                            <li><strong>ODS 6 – Água Limpa e Saneamento:</strong> Foca na disponibilidade e gestão sustentável da água, melhora da qualidade da água e redução da poluição dos rios. O projeto Hidrotec contribui diretamente ao promover a limpeza dos rios, reduzindo a poluição e garantindo o uso sustentável dos recursos hídricos, apoiando o acesso à água limpa para comunidades e a proteção dos ecossistemas aquáticos.</li>
+                            <li><strong>ODS 8 – Trabalho decente e crescimento econômico</strong> Fomenta o crescimento econômico inclusivo com geração de empregos sustentáveis. O Hidrotec contribui gerando empregos relacionados à conservação ambiental e promovendo práticas sustentáveis que impulsionam o desenvolvimento econômico vinculado à preservação ambiental.</li>
+                            <li><strong>ODS 9 – Indústria, inovação e infraestrutura</strong> Incentiva a construção de infraestrutura sustentável e inovação tecnológica. O Hidrotec pode aplicar tecnologias inovadoras e infraestrutura eficiente para a limpeza e monitoramento dos rios, promovendo uma abordagem sustentável aliada ao avanço tecnológico.</li>
+                            <li><strong>Lixo em Córregos:</strong> No Brasil, cerca de 67% do plástico que polui os oceanos, equivalente a milhões de toneladas, tem origem em rios e bacias hidrográficas, destacando a gravidade do lixo em córregos e rios. A Hidrotec responde a esse desafio com a instalação de barreiras ecológicas para reter resíduos, realização de mutirões de limpeza e ações educativas que conscientizam comunidades sobre a importância da redução da poluição, promovendo a recuperação sustentável dos cursos d’água.</li>
+                            <li><strong>Projeto hidro:</strong> utiliza tecnologia inovadora de barreiras ecológicas que retêm o lixo nos rios com 90% de eficiência, sem prejudicar a vida marinha, facilitando a coleta sustentável e promovendo a recuperação dos ecossistemas aquáticos. Desenvolvido pelos fundadores Nathaly e Kaique na programação, com o apoio dos colaboradores Gustavo, Kawã, Julia, Kamila e Hevellyn, o projeto une tecnologia e compromisso ambiental para um futuro mais limpo e sustentável.</li>
+                        </ul>
+                        <a href="#projeto" class="botao-saiba-mais" onclick="mostrarGuia('projeto'); return false;">
+                            Conheça nosso projeto inovador →
+                        </a>
+                    </div>
+
+                    <div class="coluna direita">
+                        <div class="sobre-item">
+                            <h3>🌱 Uma Cooperativa que Nasceu para Fazer a Diferença</h3>
+                            <p>A Hidrotec nasceu com o propósito de transformar o planeta, bairros e cidades ao combater a poluição nos rios, retirando lixo dos cursos d’água e promovendo a sustentabilidade. Nosso trabalho vai além da limpeza: buscamos conscientizar as pessoas sobre o descarte correto do lixo, criando uma cultura ambiental que preserve os recursos hídricos para as futuras gerações.</p>
+                        </div>
+
+                        <div class="sobre-item">
+                            <h3>💧 Nossa Intenção</h3>
+                            <p>Vai além da simples limpeza dos rios — queremos ajudar a preservar o planeta por meio da redução efetiva do lixo nos cursos d'água, promovendo a sustentabilidade e garantindo recursos naturais limpos para as futuras gerações. Acreditamos que, com inovação e ética, é possível transformar mentalidades e viver em harmonia com a água, protegendo o meio ambiente e fortalecendo a conscientização sobre o descarte correto do lixo.</p>
+                        </div>
+
+                        <div class="sobre-item equipe">
+                            <h3>👨‍🔬 Fundadores do projeto hidro</h3>
+                            <div class="lista-nomes">
+                                <span>Kawã</span>
+                                <span>Gustavo</span>
+                                <span>Júlia</span>
+                                <span>Kamila</span>
+                                <span>Hevellyn</span>
+                            </div>
+                        </div>
+
+                        <div class="sobre-item equipe">
+                            <h3>💻 Nossos programadores</h3>
+                            <div class="lista-nomes destaque">
+                                <span>Kaique Fabiano</span>
+                                <span>Nathaly Nicoly</span>
+                            </div>
+                        </div>
+
+                        <p class="final">A Hidrotec é feita por pessoas que acreditam na transformação: que arregaçam as mangas, aprendem com os erros, celebram as conquistas e nunca desistem. Sua participação é essencial para cuidarmos da água, restaurarmos nossos rios e garantirmos um futuro sustentável para todos. Seja bem-vindo a este movimento, onde cada gesto faz a diferença — e a água agradece. 💧</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Guia CALENDÁRIO -->
+<section id="calendario" class="guia">
+    <h2>Calendário de Atividades</h2>
+
+    <!-- Controles de navegação -->
+    <div class="calendario-controles">
+        <button id="btn-mes-anterior"><</button>
+        <h3 id="mes-ano-atual">Junho 2025</h3>
+        <button id="btn-mes-proximo">></button>
+        <button id="btn-adicionar-evento" class="botao-adicionar">+ Adicionar Evento</button>
+    </div>
+
+    <!-- Layout em duas colunas -->
+    <div class="calendario-layout">
+        <!-- COLUNA ESQUERDA: Grade do calendário -->
+        <div class="coluna-calendario">
+            <div class="calendario-grid" id="calendario-grid">
+                <div class="dia-semana">Dom</div>
+                <div class="dia-semana">Seg</div>
+                <div class="dia-semana">Ter</div>
+                <div class="dia-semana">Qua</div>
+                <div class="dia-semana">Qui</div>
+                <div class="dia-semana">Sex</div>
+                <div class="dia-semana">Sáb</div>
+                <!-- Dias serão gerados por JS -->
+            </div>
+        </div>
+
+        <!-- COLUNA DIREITA: Eventos -->
+        <div class="coluna-eventos">
+            <!-- Eventos do dia selecionado -->
+            <div class="eventos-dia" id="eventos-dia">
+                <h3>Eventos do dia <span id="data-eventos">—</span></h3>
+                <ul id="lista-eventos-dia"></ul>
+                <p id="sem-eventos">Selecione um dia para ver os eventos.</p>
+            </div>
+
+            <!-- Eventos do mês inteiro -->
+            <div class="eventos-mes">
+                <h3>Eventos deste mês</h3>
+                <ul id="lista-eventos-mes">
+                    <li class="sem-eventos-mes">Nenhum evento agendado para este mês.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+        <!-- Guia PROJETO (CORRIGIDA) -->
+        <section id="projeto" class="guia">
+            <h2>Projeto Hidro</h2>
+            <div class="projeto-container">
+                <div class="projeto-texto">
+                    <p><strong>Nome do Projeto:</strong> Hidro – Barreira Ecológica Inteligente</p>
+                    
+                    <p><strong>Objetivo:</strong></p>
+                    <ul>
+                        <li>Promover a limpeza e conservação dos rios, reduzindo a poluição e protegendo os ecossistemas aquáticos.</li>
+                        <li>Desenvolver e aplicar tecnologias inovadoras e sustentáveis para monitoramento e retenção de resíduos nos corpos d’água.</li>
+                        <li>Conscientizar comunidades e fomentar a educação ambiental sobre o descarte correto de resíduos.</li>
+                        <li>Contribuir para a sustentabilidade ambiental, garantindo recursos hídricos limpos e preservados para as futuras gerações.</li>
+                        <li>Estimular a cooperação entre pessoas, empresas e governos para potencializar ações de preservação e recuperação hídrica.</li>
+                    </ul>
+
+                    <p><strong>Impacto:</strong> A Hidrotec é um compromisso vivo com a transformação do nosso planeta. Nosso propósito é restaurar a pureza dos rios, proteger a vida que deles depende e cultivar uma cultura de respeito e cuidado com a água. Por meio de inovação e cooperação, queremos inspirar comunidades a agir com consciência, garantindo que as futuras gerações herdem um mundo rico em recursos naturais, saudável e sustentável. Cuidar do meio ambiente não é só uma escolha — é um legado de vida que construímos juntos.</p>
+                </div>
+                <div class="projeto-imagem"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="rodape-conteudo">
+            <p>&copy; 2025 Hidrotec Cooperativa. Todos os direitos reservados.</p>
+            <p class="agradecimento">
+                Agradecemos a <strong>Marcio luiz G. J. </strong> MEI da tecinforj, por ajudar na criaçao desse pequeno site 
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
